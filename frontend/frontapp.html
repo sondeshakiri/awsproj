@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App 3 Tiers</title>
+</head>
+<body>
+    <h1>App 3 Tiers</h1>
+    <button onclick="fetchData()">Afficher la liste de données</button>
+    <div id="dataList"></div>
+
+    <script>
+        async function fetchData() {
+            const response = await fetch('http://app-instance-ip:3000/api/data');
+            const data = await response.json();
+
+            const dataList = document.getElementById('dataList');
+            dataList.innerHTML = '<h2>Liste de données :</h2><ul>';
+            
+            data.forEach(item => {
+                dataList.innerHTML += `<li>${item.name}</li>`;
+            });
+
+            dataList.innerHTML += '</ul>';
+        }
+    </script>
+</body>
+</html>
