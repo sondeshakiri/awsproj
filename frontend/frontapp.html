@@ -1,29 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>App 3 Tiers</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accès à la Base de Données</title>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
-    <h1>App 3 Tiers</h1>
-    <button onclick="fetchData()">Afficher la liste de données</button>
-    <div id="dataList"></div>
 
-    <script>
-        async function fetchData() {
-            const response = await fetch('http://app-instance-ip:3000/api/data');
-            const data = await response.json();
+  <h1>Données de la Base de Données</h1>
 
-            const dataList = document.getElementById('dataList');
-            dataList.innerHTML = '<h2>Liste de données :</h2><ul>';
-            
-            data.forEach(item => {
-                dataList.innerHTML += `<li>${item.name}</li>`;
+  <ul id="dataList"></ul>
+
+  <script>
+    $(document).ready(function () {
+      $.ajax({
+        url: '/api/getData',
+        method: 'GET',
+        success: function (data) {
+          var dataList = $('#dataList');
+          if (data && data.length > 0) {
+            data.forEach(function (item) {
+              dataList.append('<li>' + item.name + ' - ' + item.value + '</li>');
             });
-
-            dataList.innerHTML += '</ul>';
+          } else {
+            dataList.append('<li>Aucune donnée trouvée.</li>');
+          }
+        },
+        error: function (error) {
+          console.log('Erreur lors de la récupération des données:', error);
         }
-    </script>
+      });
+    });
+  </script>
+
 </body>
 </html>
