@@ -5,8 +5,8 @@ const app = express();
 const port = 3000;
 
 const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
+  host: 'myappdatabase.cdi22ggeq816.us-east-1.rds.amazonaws.com',
+  user: 'admin',
   password: '14507329',
   database: 'mydatabase'
 });
