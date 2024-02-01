@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Accès à la Base de Données</title>
+  <!-- Utilisez la version locale de jQuery si nécessaire -->
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
@@ -15,7 +16,8 @@
   <script>
     $(document).ready(function () {
       $.ajax({
-        url: 'InternetLB-1003172892.us-east-1.elb.amazonaws.com/api/getData',
+        // Utilisez le DNS privé du Load Balancer
+        url: 'http://LBtest-1715848449.us-east-1.elb.amazonaws.com/api/getData',
         method: 'GET',
         success: function (data) {
           var dataList = $('#dataList');
