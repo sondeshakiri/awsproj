@@ -8,21 +8,14 @@ app.use(cors());
 
 // Utilisez le DNS privé du endpoint de la base de données
 const db = mysql.createConnection({
-  host: 'myappdatabase.cdi22ggeq816.us-east-1.rds.amazonaws.com',
-  user: 'votre_utilisateur_mysql',
-  password: 'votre_mot_de_passe_mysql',
+  host: 'mydb.cdi22ggeq816.us-east-1.rds.amazonaws.com',
+  user: 'admin',
+  password: '14507329',
   database: 'mydb'
 });
 
-db.connect((err) => {
-  if (err) {
-    throw err;
-  }
-  console.log('Connecté à la base de données MySQL');
-});
-
 app.get('/api/getData', (req, res) => {
-  const sql = 'SELECT * FROM votre_table';
+  const sql = 'SELECT * FROM etudiant'; // Utilisez le nom de la table 'etudiant'
   db.query(sql, (err, result) => {
     if (err) throw err;
     res.json(result);
