@@ -2,16 +2,16 @@ const express = require('express');
 const mysql = require('mysql');
 const cors = require('cors');
 
-
-
 const app = express();
 const port = 3000;
 app.use(cors());
+
+// Utilisez le DNS privé du endpoint de la base de données
 const db = mysql.createConnection({
   host: 'myappdatabase.cdi22ggeq816.us-east-1.rds.amazonaws.com',
-  user: 'admin',
-  password: '14507329',
-  database: 'mydatabase'
+  user: 'votre_utilisateur_mysql',
+  password: 'votre_mot_de_passe_mysql',
+  database: 'mydb'
 });
 
 db.connect((err) => {
