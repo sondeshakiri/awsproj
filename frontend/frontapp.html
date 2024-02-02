@@ -4,14 +4,39 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Accès à la Base de Données</title>
-  <!-- Utilisez la version locale de jQuery si nécessaire -->
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
 
   <h1>Données de la Base de Données</h1>
 
-  <ul id="dataList"></ul>
+  <table id="dataTable">
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <!-- Ajoutez d'autres colonnes si nécessaire -->
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
 
   <script>
     $(document).ready(function () {
@@ -20,13 +45,17 @@
         url: 'http://LBtest-1715848449.us-east-1.elb.amazonaws.com/api/getData',
         method: 'GET',
         success: function (data) {
-          var dataList = $('#dataList');
+          var dataTable = $('#dataTable tbody');
           if (data && data.length > 0) {
             data.forEach(function (item) {
-              dataList.append('<li>' + item.name + ' - ' + item.value + '</li>');
+              console.log(item);
+              var row = '<tr><td>' + item.nom + '</td><td>' + item.prenom + '</td></tr>';
+              console.log(row);
+              dataTable.append(row);
             });
           } else {
-            dataList.append('<li>Aucune donnée trouvée.</li>');
+            // Afficher un message s'il n'y a aucune donnée
+            dataTable.append('<tr><td colspan="2">Aucune donnée trouvée.</td></tr>');
           }
         },
         error: function (error) {
