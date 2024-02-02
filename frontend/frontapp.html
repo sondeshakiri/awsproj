@@ -42,7 +42,7 @@
     $(document).ready(function () {
       $.ajax({
         // Utilisez le DNS privé du Load Balancer
-        url: 'http://LBtest-1715848449.us-east-1.elb.amazonaws.com/api/getData',
+        url: 'http://LBtest-1715848449.us-east-1.elb.amazonaws.com:3000/api/getData',
         method: 'GET',
         success: function (data) {
           var dataTable = $('#dataTable tbody');
